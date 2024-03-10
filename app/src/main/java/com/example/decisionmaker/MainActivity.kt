@@ -99,7 +99,7 @@ class MainActivity : ComponentActivity() {
                                 // Execute whenever the add ("+") button is clicked
                                 onClick = {
                                     // Check if the input is not blank, then add the trimmed
-//                                  // option the the list
+                                    // option the the list
                                     if (option.isNotBlank()) {
                                         optionsList = optionsList + option.trim()
                                         // Reset the option variable to an empty string
