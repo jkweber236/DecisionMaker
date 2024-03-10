@@ -1,6 +1,6 @@
 # Overview
 
-This program is a Decision Maker app, a tool designed to assist users in making decisions by randomly selecting an option from a list provided by the user. the app features a simple and interactive user interface. Users can input their options into the text field and press the add button to add them to a list. Once all their options have been added, they can click the "Make decision" button, at which point, the app will random select and display a decision. 
+This program is a Decision Maker app, a tool designed to assist users in making decisions by randomly selecting an option from a list provided by the user. The app features a simple and interactive user interface. Users can input their options into the text field and press the add button to add them to a list. Once all their options have been added, they can click the "Make decision" button, at which point, the app will random select and display a decision. 
 
 The purpose of creating this app was to further my learning in mobile app development, specifically using the Kotlin programming language and the Android Studio IDE. This project serves as a practical application of UI design, state management, and interaction in a mobile environment.
 
