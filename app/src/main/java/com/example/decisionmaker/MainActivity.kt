@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -16,7 +15,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.example.decisionmaker.ui.theme.DarkBlue
@@ -28,91 +26,147 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.height
+import com.example.decisionmaker.ui.theme.OrangeRed
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
+import com.example.decisionmaker.ui.theme.LighterBlue
+import androidx.compose.ui.Alignment
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             DecisionMakerTheme {
-                // A surface container using the 'background' color from the theme
+                // A surface container to set the background
                 Surface(modifier = Modifier.fillMaxSize(), color = LightBlue) {
+
+                    // Initialize variable to store an option from the user
                     var option by remember { mutableStateOf("") }
+                    // Initialize variable to hold all options from the user
                     var optionsList by remember { mutableStateOf(emptyList<String>()) }
+                    // Intialize variable to store the decision made by the program
                     var decision by remember { mutableStateOf<String?>(null) }
 
+                    // Column layout to organize elements vertically
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(16.dp)
                     ) {
-                        // Row for the input box and the "+" button
-                        Row(
-//                            modifier = Modifier.fillMaxWidth(),
-
+                        // Header section with the app title
+                        // Setting the appearance of the rectangle holding the app name
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 25.dp)
+                                .background(OrangeRed)
+                                .height(70.dp)
                         ) {
-                            // TextField for user input with multiline support
+                            // Setting the appearance of the app name
+                            Text(
+                                text = "Decision Maker",
+                                color = Color.White,
+                                modifier = Modifier
+                                    .padding(top = 15.dp)
+                                    .padding(start = 8.dp),
+                                fontSize = 35.sp
+                            )
+                        }
+
+                        // Row for the input box and the "+" button
+                        Row()
+                        {
+                            // Section for user to enter options
                             TextField(
+                                // Storing the current (or most recent) option input
                                 value = option,
+                                // Updates the current option when the input value changes
                                 onValueChange = {
                                     option = it
                                 },
-                                label = { Text("Enter your decision options") },
+                                // Instructions displayed in the input field
+                                label = { Text("Enter your options") },
+                                // Setting the submit action for the option input
                                 keyboardOptions = KeyboardOptions.Default.copy(
                                     imeAction = ImeAction.Done
                                 ),
-                                keyboardActions = KeyboardActions(
-                                    onDone = {
-                                        if (option.isNotBlank()) {
-                                            optionsList = optionsList + option.trim()
-                                            option = ""
-                                        }
-                                    }
-                                ),
+
+                                // Styling and layout properties for the text
                                 modifier = Modifier
+                                    .padding(start = 10.dp)
                                     .weight(1f) // Take up remaining horizontal space
                             )
 
-                            // Button to add options.
+                            // Button to add the option typed into the input box
                             Button(
+                                // Execute whenever the add ("+") button is clicked
                                 onClick = {
+                                    // Check if the input is not blank, then add the trimmed
+//                                  // option the the list
                                     if (option.isNotBlank()) {
                                         optionsList = optionsList + option.trim()
+                                        // Reset the option variable to an empty string
                                         option = ""
                                     }
                                 },
+                                // Setting the appearance of the "+" button
                                 modifier = Modifier
-                                    .padding(start = 8.dp)
+                                    .padding(end = 10.dp)
                                     .clip(RectangleShape)
-                                    .width(50.dp)
-                                    .height(50.dp)
+                                    .background(color = DarkBlue, shape = RectangleShape)
+                                    .width(56.dp)
+                                    .height(56.dp)
+
                             ) {
+                                // Adding text to the "+" button
                                 Text("+")
                             }
                         }
 
-                        // Button to make a decision
+                        // Button to have the program make and display a decision
                         Button(
                             onClick = {
+                                // Makes a decision if the list of options is not empty
                                 if (optionsList.isNotEmpty()) {
                                     decision = makeDecision(optionsList)
                                 }
                             },
-                            modifier = Modifier.padding(top = 8.dp)
+                            // Sets the appearance of the decision button
+                            modifier = Modifier
+                                .padding(top = 30.dp)
+                                .padding(bottom = 30.dp)
+                                .padding(start = 80.dp, end = 80.dp)
+                                .width(250.dp)
+
                         ) {
-                            Text("Make decision")
+                            // Adding text to the decision button
+                            Text("Make decision",
+                                fontSize = 28.sp)
                         }
 
-                        // Decision box
+                        // Display decision box
                         decision?.let { decision ->
-                            // Pass the decision value to the DisplayDecision composable
-                            DisplayDecision("Decision", DarkBlue, decision)
+                            // Pass the decision value to the DisplayDecision function
+                            DisplayDecision(LighterBlue, decision,
+                                // Set the spacing of the decision display box
+                                modifier = Modifier
+                                    .padding(start = 30.dp, end = 30.dp)
+                                    .padding(bottom = 30.dp))
                         }
 
-                        // List of options
+                        // Displays each of the options to the user
                         optionsList.forEach { option ->
                             Text(
-                                text = option,
-                                modifier = Modifier.padding(top = 8.dp)
+                                // Set the appearance of the options
+                                text = "> $option",
+                                fontSize = 28.sp,
+                                color = Color.Black,
+                                modifier = Modifier
+                                    .padding(bottom = 5.dp)
+                                    .padding(start = 30.dp)
                             )
                         }
                     }
@@ -122,27 +176,33 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// Function to display the decision with a colored background
 @Composable
-fun DisplayDecision(name: String, bgColor: Color, decision: String, modifier: Modifier = Modifier) {
+fun DisplayDecision(bgColor: Color, decision: String, modifier: Modifier = Modifier) {
     Surface(color = bgColor, modifier = modifier) {
-        Text(
-            text = "$name: $decision",
-            // Add padding for better visibility
-            modifier = Modifier.padding(16.dp)
-        )
+        // Split the decision by word to display each on a new line
+        val words = decision.split(" ")
+        Column(
+            modifier = Modifier
+                .padding(top = 30.dp, bottom = 30.dp)
+                .wrapContentSize(Alignment.Center)
+        ) {
+            // Set the appearance of and display each individual word in the decision
+            words.forEach { word ->
+                Text(
+                    text = word,
+                    textAlign = TextAlign.Center,
+                    fontSize = calculateFontSize(word).sp,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    color = Color.Black
+                )
+            }
+        }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DisplayDecisionPreview() {
-    DecisionMakerTheme {
-        val decision = makeDecision(listOf("Option1", "Option2", "Option3")) // Default value for preview
-        DisplayDecision("Decision", DarkBlue, decision)
-    }
-}
-
-// Function to select a random option.
+// Function to select a random option from the given list
 fun makeDecision(options: List<String>): String {
 
     val random = Random
@@ -152,5 +212,15 @@ fun makeDecision(options: List<String>): String {
         // Return the option at the specified index.
         return options[selectedIndex]
     }
+    // Returns if no options have been given
     return "No options available"
+}
+
+// Function to calculate the font size based on the length of the decision
+fun calculateFontSize(decision: String): Int {
+    val length = decision.length
+    if (length < 7) {
+        return 65
+    }
+    return 55
 }
