@@ -18,14 +18,13 @@
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+* [Android Studio (Official Site)](https://developer.android.com/studio)
+* [Android Studio Tutorial](https://www.geeksforgeeks.org/android-studio-tutorial/)
+* [Jetpack Compose](https://developer.android.com/jetpack/compose)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
 * Implement animations and improve graphics to create a more dynamic and visually appealing interface. 
 * Allow users to save and load lists of options for repeated use
 * Add features to customize the appearance of the decision display
-* Create a recommendation page to provide users with additional options in a given category
+* Create a recommendation page to provide users with additional options in certain categories
