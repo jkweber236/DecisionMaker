@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                     var option by remember { mutableStateOf("") }
                     // Initialize variable to hold all options from the user
                     var optionsList by remember { mutableStateOf(emptyList<String>()) }
-                    // Intialize variable to store the decision made by the program
+                    // Initialize variable to store the decision made by the program
                     var decision by remember { mutableStateOf<String?>(null) }
 
                     // Column layout to organize elements vertically
