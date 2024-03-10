@@ -1,12 +1,8 @@
 # Overview
 
-{Important!  Do not say in this section that this is college assignment.  Talk about what you are trying to accomplish as a software engineer to further your learning.}
+This program is a Decision Maker app, a tool designed to assist users in making decisions by randomly selecting an option from a list provided by the user. the app features a simple and interactive user interface. Users can input their options into the text field and press the add button to add them to a list. Once all their options have been added, they can click the "Make decision" button, at which point, the app will random select and display a decision. 
 
-{Provide a description of your app.  Describe how to use the app.}
-
-{Describe your purpose for creating this app.}
-
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the app running and a walkthrough of the code.}
+The purpose of creating this app was to further my learning in mobile app development, specifically using the Kotlin programming language and the Android Studio IDE. This project serves as a practical application of UI design, state management, and interaction in a mobile environment.
 
 [Software Demo Video](http://youtube.link.goes.here)
 
